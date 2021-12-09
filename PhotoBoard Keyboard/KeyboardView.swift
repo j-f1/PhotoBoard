@@ -54,24 +54,30 @@ struct KeyboardView: View {
                         selection = []
                     }
                 }) {
-                    Label {
-                        Text("Select Multiple")
-                            .font(.system(size: 18))
-                            .opacity(multiple ? 1 : 0.5)
-                    } icon: {
-                        Image(systemName: "square.stack")
-                            .foregroundColor(multiple ? Color(uiColor: .systemBackground) : .primary)
-                            .scaleEffect(multiple ? 0.9 : 1)
-                            .background(
-                                Circle()
-                                    .inset(by: -5)
-                                    .fill(.primary)
-                                    .scaleEffect(multiple ? 1 : 1.5)
-                                    .opacity(multiple ? 1 : 0)
-                            )
-                    }
+                    Image(systemName: "square.stack")
+                        .foregroundColor(multiple ? Color(uiColor: .systemBackground) : .primary)
+                        .scaleEffect(multiple ? 0.9 : 1)
+                        .background(
+                            Circle()
+                                .inset(by: -5)
+                                .fill(.primary)
+                                .scaleEffect(multiple ? 1 : 1.5)
+                                .opacity(multiple ? 1 : 0)
+                        )
                 }
 //                .animation(.easeOut(duration: 0.2), value: multiple)
+                Spacer()
+                if let selection = selection {
+                    Button(action: {
+                        UIPasteboard.general.images = Array(selection)
+                        self.selection = nil
+                    }) {
+                        Label("Copy\(selection.count == 0 ? " All" : selection.count == 1 ? "" : " All \(selection.count)")", systemImage: "doc.on.doc")
+                    }
+                    .disabled(selection.isEmpty)
+                    .font(.system(size: 15))
+                    .buttonStyle(.borderedProminent)
+                }
                 Spacer()
                 Button(action: proxy.deleteBackward) {
                     Image(systemName: "delete.backward")

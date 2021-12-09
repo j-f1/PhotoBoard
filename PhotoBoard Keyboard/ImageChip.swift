@@ -93,7 +93,7 @@ struct ImageChip: View {
                                 .foregroundStyle(.white, .blue)
                         } else {
                             Image(systemName: "circle.fill")
-                                .foregroundStyle(.thinMaterial)
+                                .foregroundStyle(.ultraThinMaterial)
                         }
                     }
                     .overlay(Image(systemName: "circle").font(.title.weight(.light)).foregroundColor(.white))
