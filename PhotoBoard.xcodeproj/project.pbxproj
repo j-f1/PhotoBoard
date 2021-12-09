@@ -13,6 +13,8 @@
 		854AF0CC275F08B7006261DE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 854AF0CB275F08B7006261DE /* Preview Assets.xcassets */; };
 		854AF0D9275F08D5006261DE /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854AF0D8275F08D5006261DE /* KeyboardViewController.swift */; };
 		854AF0DD275F08D5006261DE /* PhotoBoard Keyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 854AF0D6275F08D5006261DE /* PhotoBoard Keyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		854AF0E3275F1187006261DE /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854AF0E2275F1187006261DE /* KeyboardView.swift */; };
+		854AF0E4275F11C2006261DE /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854AF0E2275F1187006261DE /* KeyboardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,7 @@
 		854AF0D6275F08D5006261DE /* PhotoBoard Keyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "PhotoBoard Keyboard.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		854AF0D8275F08D5006261DE /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		854AF0DA275F08D5006261DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		854AF0E2275F1187006261DE /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				854AF0D8275F08D5006261DE /* KeyboardViewController.swift */,
+				854AF0E2275F1187006261DE /* KeyboardView.swift */,
 				854AF0DA275F08D5006261DE /* Info.plist */,
 			);
 			path = "PhotoBoard Keyboard";
@@ -214,6 +218,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				854AF0E4275F11C2006261DE /* KeyboardView.swift in Sources */,
 				854AF0C7275F08B4006261DE /* ContentView.swift in Sources */,
 				854AF0C5275F08B4006261DE /* PhotoBoardApp.swift in Sources */,
 			);
@@ -224,6 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				854AF0D9275F08D5006261DE /* KeyboardViewController.swift in Sources */,
+				854AF0E3275F1187006261DE /* KeyboardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,7 +428,7 @@
 				DEVELOPMENT_TEAM = 288H3WAR3W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "PhotoBoard Keyboard/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "PhotoBoard Keyboard";
+				INFOPLIST_KEY_CFBundleDisplayName = PhotoBoard;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -447,7 +453,7 @@
 				DEVELOPMENT_TEAM = 288H3WAR3W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "PhotoBoard Keyboard/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "PhotoBoard Keyboard";
+				INFOPLIST_KEY_CFBundleDisplayName = PhotoBoard;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
