@@ -1,5 +1,5 @@
 //
-//  AssetView.swift
+//  ImageProvider.swift
 //  PhotoBoard
 //
 //  Created by Jed Fox on 12/9/21.
@@ -37,27 +37,5 @@ class ImageProvider: ObservableObject {
 
     deinit {
         requestID.map(Self.manager.cancelImageRequest)
-    }
-}
-
-struct AssetView: View {
-    @StateObject var loader: ImageProvider
-    let asset: PHAsset
-
-    init(_ asset: PHAsset) {
-        self.asset = asset
-        _loader = StateObject(wrappedValue: ImageProvider(asset: asset))
-    }
-
-    var body: some View {
-        if let image = loader.image {
-            Image(uiImage: image)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .onDrag { NSItemProvider(object: image) }
-        } else {
-            Color.gray
-                .aspectRatio(CGSize(width: asset.pixelWidth, height: asset.pixelHeight), contentMode: .fill)
-        }
     }
 }

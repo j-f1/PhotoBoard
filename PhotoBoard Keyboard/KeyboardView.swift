@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Photos
 
 let data = Array(repeating: 0, count: 10).map { _ in CGFloat.random(in: (3/4)...(4/3)) }
 
@@ -35,9 +36,7 @@ struct KeyboardView: View {
             ScrollView(.horizontal) {
                 LazyHStack(spacing: 25) {
                     ForEach(provider.photos) { asset in
-                        Button(action: {}) {
-                            AssetView(asset)
-                        }
+                        ImageChip(asset: asset)
                     }
                 }
                 .padding(.horizontal, 20)

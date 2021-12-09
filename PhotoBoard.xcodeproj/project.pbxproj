@@ -17,8 +17,10 @@
 		854AF0E4275F11C2006261DE /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854AF0E2275F1187006261DE /* KeyboardView.swift */; };
 		85D6DC5627627E02008C4C7A /* AssetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D6DC5527627E02008C4C7A /* AssetProvider.swift */; };
 		85D6DC5727628930008C4C7A /* AssetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D6DC5527627E02008C4C7A /* AssetProvider.swift */; };
-		85D6DC5927628B7C008C4C7A /* AssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D6DC5827628B7C008C4C7A /* AssetView.swift */; };
-		85D6DC5A27628B7C008C4C7A /* AssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D6DC5827628B7C008C4C7A /* AssetView.swift */; };
+		85D6DC5927628B7C008C4C7A /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D6DC5827628B7C008C4C7A /* ImageProvider.swift */; };
+		85D6DC5A27628B7C008C4C7A /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D6DC5827628B7C008C4C7A /* ImageProvider.swift */; };
+		85D6DC5C2762ACC5008C4C7A /* ImageChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D6DC5B2762ACC5008C4C7A /* ImageChip.swift */; };
+		85D6DC5D2762ACC5008C4C7A /* ImageChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D6DC5B2762ACC5008C4C7A /* ImageChip.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +58,8 @@
 		854AF0DA275F08D5006261DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		854AF0E2275F1187006261DE /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		85D6DC5527627E02008C4C7A /* AssetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetProvider.swift; sourceTree = "<group>"; };
-		85D6DC5827628B7C008C4C7A /* AssetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetView.swift; sourceTree = "<group>"; };
+		85D6DC5827628B7C008C4C7A /* ImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
+		85D6DC5B2762ACC5008C4C7A /* ImageChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageChip.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,10 +120,11 @@
 		854AF0D7275F08D5006261DE /* PhotoBoard Keyboard */ = {
 			isa = PBXGroup;
 			children = (
-				85D6DC5827628B7C008C4C7A /* AssetView.swift */,
-				854AF0D8275F08D5006261DE /* KeyboardViewController.swift */,
-				854AF0E2275F1187006261DE /* KeyboardView.swift */,
 				85D6DC5527627E02008C4C7A /* AssetProvider.swift */,
+				85D6DC5B2762ACC5008C4C7A /* ImageChip.swift */,
+				85D6DC5827628B7C008C4C7A /* ImageProvider.swift */,
+				854AF0E2275F1187006261DE /* KeyboardView.swift */,
+				854AF0D8275F08D5006261DE /* KeyboardViewController.swift */,
 				854AF0DA275F08D5006261DE /* Info.plist */,
 			);
 			path = "PhotoBoard Keyboard";
@@ -230,7 +234,8 @@
 				854AF0E4275F11C2006261DE /* KeyboardView.swift in Sources */,
 				854AF0C7275F08B4006261DE /* ContentView.swift in Sources */,
 				854AF0C5275F08B4006261DE /* PhotoBoardApp.swift in Sources */,
-				85D6DC5927628B7C008C4C7A /* AssetView.swift in Sources */,
+				85D6DC5927628B7C008C4C7A /* ImageProvider.swift in Sources */,
+				85D6DC5C2762ACC5008C4C7A /* ImageChip.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,7 +245,8 @@
 			files = (
 				854AF0D9275F08D5006261DE /* KeyboardViewController.swift in Sources */,
 				854AF0E3275F1187006261DE /* KeyboardView.swift in Sources */,
-				85D6DC5A27628B7C008C4C7A /* AssetView.swift in Sources */,
+				85D6DC5D2762ACC5008C4C7A /* ImageChip.swift in Sources */,
+				85D6DC5A27628B7C008C4C7A /* ImageProvider.swift in Sources */,
 				85D6DC5627627E02008C4C7A /* AssetProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
