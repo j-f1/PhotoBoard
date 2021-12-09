@@ -14,22 +14,19 @@ struct FloatyButtonStyle: ButtonStyle {
         configuration.label
             .cornerRadius(10)
             .shadow(radius: configuration.isPressed ? 5 : 12)
-            .onDrag {
-                NSItemProvider(object: URL(string: "https://apple.com")! as NSURL)
-            }
             .padding(.vertical)
             .scaleEffect(configuration.isPressed ? 0.95 : 1)
     }
 }
 
 struct KeyboardView: View {
+    @StateObject var provider = AssetProvider()
     var body: some View {
         ScrollView(.horizontal) {
-            HStack(spacing: 25) {
-                ForEach(data, id: \.self) { aspect in
+            LazyHStack(spacing: 25) {
+                ForEach(provider.photos) { asset in
                     Button(action: {}) {
-                        Color.brown
-                            .aspectRatio(aspect, contentMode: .fill)
+                        AssetView(asset)
                     }
                 }
             }

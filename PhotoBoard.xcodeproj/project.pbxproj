@@ -15,6 +15,10 @@
 		854AF0DD275F08D5006261DE /* PhotoBoard Keyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 854AF0D6275F08D5006261DE /* PhotoBoard Keyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		854AF0E3275F1187006261DE /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854AF0E2275F1187006261DE /* KeyboardView.swift */; };
 		854AF0E4275F11C2006261DE /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854AF0E2275F1187006261DE /* KeyboardView.swift */; };
+		85D6DC5627627E02008C4C7A /* AssetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D6DC5527627E02008C4C7A /* AssetProvider.swift */; };
+		85D6DC5727628930008C4C7A /* AssetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D6DC5527627E02008C4C7A /* AssetProvider.swift */; };
+		85D6DC5927628B7C008C4C7A /* AssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D6DC5827628B7C008C4C7A /* AssetView.swift */; };
+		85D6DC5A27628B7C008C4C7A /* AssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D6DC5827628B7C008C4C7A /* AssetView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,8 @@
 		854AF0D8275F08D5006261DE /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		854AF0DA275F08D5006261DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		854AF0E2275F1187006261DE /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
+		85D6DC5527627E02008C4C7A /* AssetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetProvider.swift; sourceTree = "<group>"; };
+		85D6DC5827628B7C008C4C7A /* AssetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,8 +117,10 @@
 		854AF0D7275F08D5006261DE /* PhotoBoard Keyboard */ = {
 			isa = PBXGroup;
 			children = (
+				85D6DC5827628B7C008C4C7A /* AssetView.swift */,
 				854AF0D8275F08D5006261DE /* KeyboardViewController.swift */,
 				854AF0E2275F1187006261DE /* KeyboardView.swift */,
+				85D6DC5527627E02008C4C7A /* AssetProvider.swift */,
 				854AF0DA275F08D5006261DE /* Info.plist */,
 			);
 			path = "PhotoBoard Keyboard";
@@ -218,9 +226,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85D6DC5727628930008C4C7A /* AssetProvider.swift in Sources */,
 				854AF0E4275F11C2006261DE /* KeyboardView.swift in Sources */,
 				854AF0C7275F08B4006261DE /* ContentView.swift in Sources */,
 				854AF0C5275F08B4006261DE /* PhotoBoardApp.swift in Sources */,
+				85D6DC5927628B7C008C4C7A /* AssetView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +240,8 @@
 			files = (
 				854AF0D9275F08D5006261DE /* KeyboardViewController.swift in Sources */,
 				854AF0E3275F1187006261DE /* KeyboardView.swift in Sources */,
+				85D6DC5A27628B7C008C4C7A /* AssetView.swift in Sources */,
+				85D6DC5627627E02008C4C7A /* AssetProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +384,7 @@
 				DEVELOPMENT_TEAM = 288H3WAR3W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "for reasons";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -402,6 +415,7 @@
 				DEVELOPMENT_TEAM = 288H3WAR3W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "for reasons";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
