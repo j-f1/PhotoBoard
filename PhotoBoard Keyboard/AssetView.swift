@@ -27,7 +27,7 @@ class ImageProvider: ObservableObject {
 
         requestID = Self.manager.requestImage(
             for: asset,
-               targetSize: CGSize(width: CGFloat.infinity, height: 263),
+               targetSize: CGSize(width: CGFloat.infinity, height: 263 * UIScreen.main.scale),
                contentMode: .aspectFit,
                options: options
         ) { [weak self] image, info in
@@ -54,9 +54,7 @@ struct AssetView: View {
             Image(uiImage: image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .onDrag {
-                    NSItemProvider(object: image)
-                }
+                .onDrag { NSItemProvider(object: image) }
         } else {
             Color.gray
                 .aspectRatio(CGSize(width: asset.pixelWidth, height: asset.pixelHeight), contentMode: .fill)

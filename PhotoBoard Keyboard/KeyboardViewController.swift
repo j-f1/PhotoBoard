@@ -20,7 +20,7 @@ class KeyboardViewController: UIInputViewController {
 
 //        let data = Array(repeating: 0, count: 10).map { _ in CGFloat.random(in: (1/3)...3) }
 
-        let host = UIHostingController(rootView: KeyboardView())
+        let host = UIHostingController(rootView: KeyboardView(proxy: textDocumentProxy))
         view.translatesAutoresizingMaskIntoConstraints = false
         host.view.translatesAutoresizingMaskIntoConstraints = false
         host.view.backgroundColor = .clear
