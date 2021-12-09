@@ -13,7 +13,6 @@ let data = Array(repeating: 0, count: 10).map { _ in CGFloat.random(in: (3/4)...
 struct FloatyButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .cornerRadius(10)
             .shadow(radius: configuration.isPressed ? 5 : 10)
             .padding(.vertical)
             .scaleEffect(configuration.isPressed ? 0.95 : 1)
@@ -30,13 +29,16 @@ struct KeyboardView: View {
     let proxy: UITextDocumentProxy
 
     @StateObject var provider = AssetProvider()
-    @State var multiple = false
+    @State var selection: Set<UIImage>?
+
+    private var multiple: Bool { selection != nil }
+
     var body: some View {
         VStack(spacing: 0) {
             ScrollView(.horizontal) {
                 LazyHStack(spacing: 25) {
                     ForEach(provider.photos) { asset in
-                        ImageChip(asset: asset)
+                        ImageChip(asset: asset, selection: $selection)
                     }
                 }
                 .padding(.horizontal, 20)
@@ -45,7 +47,13 @@ struct KeyboardView: View {
             .buttonStyle(FloatyButtonStyle())
 
             HStack {
-                Button(action: { multiple.toggle() }) {
+                Button(action: {
+                    if multiple {
+                        selection = nil
+                    } else {
+                        selection = []
+                    }
+                }) {
                     Label {
                         Text("Select Multiple")
                             .font(.system(size: 18))
