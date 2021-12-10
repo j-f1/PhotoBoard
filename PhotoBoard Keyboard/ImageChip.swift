@@ -39,17 +39,36 @@ struct ImageChip: View {
                 .aspectRatio(CGSize(width: asset.pixelWidth, height: asset.pixelHeight), contentMode: .fill)
         }
     }
-
+    
     @ViewBuilder private var copiedLabel: some View {
-        Label("Copied!", systemSymbol: .docOnDoc)
-            .padding(.horizontal, 13)
-            .padding(.vertical, 7)
-            .background(.thinMaterial)
-            .cornerRadius(7)
+        GeometryReader { geom in
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Group {
+                        if geom.size.width > 100 {
+                            Label("Copied!", systemSymbol: .docOnDoc)
+                        } else {
+                            VStack {
+                                Image(systemSymbol: .docOnDoc)
+                                Text("Copied!")
+                            }
+                        }
+                    }
+                    .padding(.horizontal, 13)
+                    .padding(.vertical, 7)
+                    .background(.thinMaterial)
+                    .cornerRadius(7)
+                    Spacer()
+                }
+                Spacer()
+            }
             .transition(
                 .asymmetric(insertion: .scale(scale: 1.25), removal: .scale(scale: 0.5))
                     .combined(with: .opacity)
             )
+        }
     }
 
     private func copy() {
