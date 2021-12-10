@@ -14,13 +14,15 @@ class KeyboardViewController: UIInputViewController {
         
         // Add custom view sizing constraints here
     }
-    
+
+    private var host: UIHostingController<KeyboardView>!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
 //        let data = Array(repeating: 0, count: 10).map { _ in CGFloat.random(in: (1/3)...3) }
 
-        let host = UIHostingController(rootView: KeyboardView(proxy: textDocumentProxy))
+        host = UIHostingController(rootView: KeyboardView(proxy: textDocumentProxy))
         view.translatesAutoresizingMaskIntoConstraints = false
         host.view.translatesAutoresizingMaskIntoConstraints = false
         host.view.backgroundColor = .clear
@@ -33,10 +35,20 @@ class KeyboardViewController: UIInputViewController {
         view.bottomAnchor.constraint(equalTo: host.view.bottomAnchor).isActive = true
         host.didMove(toParent: self)
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        host.view.widthAnchor.constraint(equalTo: view.window!.widthAnchor).isActive = true
+    }
     
     override func viewWillLayoutSubviews() {
 //        self.nextKeyboardButton.isHidden = !self.needsInputModeSwitchKey
         super.viewWillLayoutSubviews()
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+//        host.rootView = KeyboardView(proxy: textDocumentProxy, width: size.width)
     }
     
     override func textWillChange(_ textInput: UITextInput?) {

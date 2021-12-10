@@ -132,13 +132,13 @@ struct KeyboardView: View {
 
             .opacity(colorScheme == .light ? 0.7 : 1)
             .font(.system(size: 21))
-            .padding(.horizontal, 25)
+            .padding(.horizontal, 27)
             .padding(.bottom, 9.5)
             .accentColor(.primary)
             .imageScale(.large)
         }
         .animation(.easeInOut(duration: didCopy ? 0.35 : 0.15), value: multiple)
-        .frame(width: 390, height: 278)
+        .frame(height: 278)
     }
 }
 
