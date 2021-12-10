@@ -33,7 +33,7 @@ extension PHAsset: Identifiable {
 @MainActor
 class AssetProvider: ObservableObject {
     @Published var photos = AssetResult()
-    private var fetchLimit = 10
+    private var fetchLimit = 20
 
     init() {
         fetchPhotos()
@@ -41,13 +41,10 @@ class AssetProvider: ObservableObject {
 
     private func fetchPhotos() {
         DispatchQueue.global(qos: .userInitiated).async { [fetchLimit] in
-            let opts = PHFetchOptions()
-            opts.sortDescriptors = [NSSortDescriptor(keyPath: \PHAsset.creationDate, ascending: false)]
-            opts.fetchLimit = fetchLimit
-            let collections = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumUserLibrary, options: nil)
-            guard let cameraRoll = collections.firstObject else { return }
-
-            let result = AssetResult(PHAsset.fetchAssets(in: cameraRoll, options: opts))
+            let fetchOpts = PHFetchOptions()
+            fetchOpts.sortDescriptors = [NSSortDescriptor(keyPath: \PHAsset.creationDate, ascending: false)]
+            fetchOpts.fetchLimit = fetchLimit
+            let result = AssetResult(PHAsset.fetchAssets(with: .image, options: fetchOpts))
 
             DispatchQueue.main.async {
                 self.photos = result
