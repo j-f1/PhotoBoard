@@ -19,11 +19,11 @@ struct NoneButtonStyle: ButtonStyle {
 struct ImageChip: View {
     @StateObject var loader: ImageProvider
     let asset: PHAsset
-    @Binding var selection: Set<UIImage>?
+    @Binding var selection: Set<ImageProvider>?
 
     @State private var copiedCount = 0
 
-    init(asset: PHAsset, selection: Binding<Set<UIImage>?>) {
+    init(asset: PHAsset, selection: Binding<Set<ImageProvider>?>) {
         self.asset = asset
         _loader = StateObject(wrappedValue: ImageProvider(asset: asset))
         _selection = selection
@@ -74,19 +74,18 @@ struct ImageChip: View {
 
     private func copy() {
         copiedCount += 1
-        UIPasteboard.general.image = loader.image
+        UIPasteboard.general.setItemProviders([loader.itemProvider], localOnly: false, expirationDate: nil)
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
             copiedCount -= 1
         }
     }
 
     private func toggle() {
-        if var selection = self.selection,
-            let image = loader.image {
-            if selection.contains(image) {
-                selection.remove(image)
+        if var selection = self.selection {
+            if selection.contains(loader) {
+                selection.remove(loader)
             } else {
-                selection.insert(image)
+                selection.insert(loader)
             }
             self.selection = selection
         }
@@ -110,7 +109,7 @@ struct ImageChip: View {
                 if let selection = selection {
                     Button(action: { toggle() }) {
                         Group {
-                            if let image = loader.image, selection.contains(image) {
+                            if selection.contains(loader) {
                                 Image(systemSymbol: .checkmarkCircle)
                                     .foregroundStyle(.white, .blue)
                             } else {

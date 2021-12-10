@@ -12,25 +12,35 @@ import Photos
 class ImageProvider: NSObject, ObservableObject {
     var itemProvider: NSItemProvider {
         let provider = NSItemProvider()
-        provider.registerObject(ofClass: UIImage.self, visibility: .all) { completionHandler in
+        let resource = PHAssetResource.assetResources(for: asset)
+        let photo = (resource.first(where: { $0.type == .fullSizePhoto }) ?? resource.first(where: { $0.type == .photo }))!
+        provider.registerFileRepresentation(forTypeIdentifier: photo.uniformTypeIdentifier, fileOptions: [], visibility: .all) { completionHandler in
+            let url = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+                .appendingPathComponent(UUID().uuidString)
+                .appendingPathComponent(photo.originalFilename)
 
-            let options = PHImageRequestOptions()
-            options.deliveryMode = .highQualityFormat
-            options.isNetworkAccessAllowed = true
-            options.resizeMode = .none
+            do {
+                try FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
 
-            let progress = Progress()
-            progress.becomeCurrent(withPendingUnitCount: 1)
-            Self.manager.requestImage(for: self.asset, targetSize: PHImageManagerMaximumSize, contentMode: .default, options: options) { image, info in
-                completionHandler(image, nil)
+                let opts = PHAssetResourceRequestOptions()
+                opts.isNetworkAccessAllowed = true
+                Self.assetManager.writeData(for: photo, toFile: url, options: opts) { error in
+                    if let error = error {
+                        completionHandler(nil, false, error)
+                    } else {
+                        completionHandler(url, false, error)
+                    }
+                }
+            } catch {
+                completionHandler(nil, false, error)
             }
-            progress.resignCurrent()
-            return progress
+            return nil
         }
         return provider
     }
 
-    private static let manager = PHCachingImageManager()
+    private static let imageManager = PHImageManager()
+    private static let assetManager = PHAssetResourceManager()
 
     @Published var progress: Double = 0
     @Published var image: UIImage?
@@ -50,7 +60,7 @@ class ImageProvider: NSObject, ObservableObject {
             self?.progress = progress
         }
 
-        requestID = Self.manager.requestImage(
+        requestID = Self.imageManager.requestImage(
             for: asset,
                targetSize: CGSize(width: CGFloat.infinity, height: 263 * UIScreen.main.scale),
                contentMode: .aspectFit,
@@ -61,6 +71,6 @@ class ImageProvider: NSObject, ObservableObject {
     }
 
     deinit {
-        requestID.map(Self.manager.cancelImageRequest)
+        requestID.map(Self.imageManager.cancelImageRequest)
     }
 }

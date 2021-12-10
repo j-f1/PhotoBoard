@@ -49,7 +49,7 @@ struct KeyboardView: View {
     let proxy: UITextDocumentProxy
 
     @StateObject var provider = AssetProvider()
-    @State var selection: Set<UIImage>?
+    @State var selection: Set<ImageProvider>?
     @State var didCopy = false
 
     private var multiple: Bool { selection != nil }
@@ -100,8 +100,7 @@ struct KeyboardView: View {
                     }.animation(didCopy ? nil : .easeInOut(duration: 1), value: didCopy)
                     if let selection = selection {
                         Button(action: {
-                            UIPasteboard.general.images = Array(selection)
-                            self.selection = nil
+                            UIPasteboard.general.setItemProviders(selection.map(\.itemProvider), localOnly: false, expirationDate: nil)
                             self.didCopy = true
                             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
                                 self.didCopy = false
