@@ -20,9 +20,19 @@ extension Color {
 }
 
 struct FloatyButtonStyle: ButtonStyle {
+    @Environment(\.colorScheme) private var colorScheme
+
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .shadow(radius: configuration.isPressed ? 5 : 10)
+            .background {
+                configuration.label
+                    .blur(radius: configuration.isPressed ? 5 : 10)
+                    .saturation(1.75)
+                    .contrast(0.75)
+                    .opacity(colorScheme == .dark ? 0.5 : 0.9)
+                    .scaleEffect(0.98)
+            }
             .padding(.vertical)
             .scaleEffect(configuration.isPressed ? 0.95 : 1)
     }
