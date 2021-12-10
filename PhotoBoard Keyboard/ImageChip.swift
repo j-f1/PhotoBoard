@@ -34,7 +34,7 @@ struct ImageChip: View {
             Image(uiImage: image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .onDrag { NSItemProvider(object: image) }
+                .onDrag { loader.itemProvider }
         } else {
             Color.gray
                 .aspectRatio(CGSize(width: asset.pixelWidth, height: asset.pixelHeight), contentMode: .fill)
