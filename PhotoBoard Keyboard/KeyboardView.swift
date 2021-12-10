@@ -101,6 +101,7 @@ struct KeyboardView: View {
                     if let selection = selection {
                         Button(action: {
                             UIPasteboard.general.setItemProviders(selection.map(\.itemProvider), localOnly: false, expirationDate: nil)
+                            self.selection = nil
                             self.didCopy = true
                             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
                                 self.didCopy = false
