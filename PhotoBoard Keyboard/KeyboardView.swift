@@ -75,7 +75,7 @@ struct KeyboardView: View {
                                 .fill(.primary)
                                 .scaleEffect(multiple ? 1 : 0.5)
                                 .opacity(multiple ? 1 : 0)
-                                .shadow(color: .primary.opacity(0.4), radius: multiple ? 4 : 0)
+                                .shadow(color: .primary.opacity(colorScheme == .dark ? 0.3 : 0.5), radius: multiple ? 4 : 0)
                         )
                 }
                 Spacer()
@@ -123,7 +123,7 @@ struct KeyboardView: View {
             .opacity(colorScheme == .light ? 0.7 : 1)
             .font(.system(size: 21))
             .padding(.horizontal, 25)
-            .padding(.bottom, 5)
+            .padding(.bottom, 9.5)
             .accentColor(.primary)
             .imageScale(.large)
         }
@@ -160,6 +160,7 @@ struct KeyboardView_Previews: PreviewProvider {
             Spacer()
             VStack(spacing: 0) {
                 KeyboardView(proxy: DemoProxy())
+                    .clipped()
                 Color.clear.frame(height: 58)
             }
             .background {
