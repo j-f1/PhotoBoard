@@ -8,6 +8,7 @@
 import UIKit
 import SwiftUI
 
+@MainActor
 class KeyboardViewController: UIInputViewController {
     override func updateViewConstraints() {
         super.updateViewConstraints()

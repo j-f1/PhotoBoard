@@ -8,6 +8,7 @@
 import SwiftUI
 import Photos
 
+@MainActor
 class ImageProvider: ObservableObject {
     private static let manager = PHCachingImageManager()
 

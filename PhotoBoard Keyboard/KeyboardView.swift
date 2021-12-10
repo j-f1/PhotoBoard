@@ -44,6 +44,7 @@ struct FillOnPressButtonStyle: ButtonStyle {
     }
 }
 
+@MainActor
 struct KeyboardView: View {
     let proxy: UITextDocumentProxy
 
@@ -124,7 +125,7 @@ struct KeyboardView: View {
                     }
                 }
                 Spacer()
-                Button(action: proxy.deleteBackward) {
+                Button(action: { proxy.deleteBackward() }) {
                     Image(systemSymbol: .deleteBackward)
                 }
                 .buttonStyle(FillOnPressButtonStyle())

@@ -15,6 +15,7 @@ struct NoneButtonStyle: ButtonStyle {
     }
 }
 
+@MainActor
 struct ImageChip: View {
     @StateObject var loader: ImageProvider
     let asset: PHAsset
@@ -39,7 +40,7 @@ struct ImageChip: View {
                 .aspectRatio(CGSize(width: asset.pixelWidth, height: asset.pixelHeight), contentMode: .fill)
         }
     }
-    
+
     @ViewBuilder private var copiedLabel: some View {
         GeometryReader { geom in
             VStack {
@@ -107,7 +108,7 @@ struct ImageChip: View {
         .overlay(alignment: .bottomTrailing) {
             Group {
                 if let selection = selection {
-                    Button(action: toggle) {
+                    Button(action: { toggle() }) {
                         Group {
                             if let image = loader.image, selection.contains(image) {
                                 Image(systemSymbol: .checkmarkCircle)
