@@ -72,7 +72,7 @@ struct KeyboardView: View {
                         UIPasteboard.general.images = Array(selection)
                         self.selection = nil
                     }) {
-                        Label("Copy\(selection.count == 0 ? " All" : selection.count == 1 ? "" : " All \(selection.count)")", systemImage: "doc.on.doc")
+                        Label("Copy \(selection.count) Photo\(selection.count == 1 ? "" : "s")", systemImage: "doc.on.doc.fill")
                     }
                     .disabled(selection.isEmpty)
                     .font(.system(size: 15))
