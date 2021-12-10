@@ -11,6 +11,14 @@ import SFSafeSymbols
 
 let data = Array(repeating: 0, count: 10).map { _ in CGFloat.random(in: (3/4)...(4/3)) }
 
+extension Color {
+    init(light: Color, dark: Color) {
+        self.init(uiColor: UIColor {
+            $0.userInterfaceStyle == .light ? UIColor(light) : UIColor(dark)
+        })
+    }
+}
+
 struct FloatyButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -33,6 +41,8 @@ struct KeyboardView: View {
     @State var selection: Set<UIImage>?
 
     private var multiple: Bool { selection != nil }
+
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         VStack(spacing: 0) {
@@ -62,11 +72,11 @@ struct KeyboardView: View {
                             Circle()
                                 .inset(by: -5)
                                 .fill(.primary)
-                                .scaleEffect(multiple ? 1 : 1.5)
+                                .scaleEffect(multiple ? 1 : 0.5)
                                 .opacity(multiple ? 1 : 0)
+                                .shadow(color: .primary.opacity(0.4), radius: multiple ? 4 : 0)
                         )
                 }
-//                .animation(.easeOut(duration: 0.2), value: multiple)
                 Spacer()
                 if let selection = selection {
                     Button(action: {
@@ -75,6 +85,11 @@ struct KeyboardView: View {
                     }) {
                         Label("Copy \(selection.count) Photo\(selection.count == 1 ? "" : "s")", systemSymbol: .docOnDoc)
                             .symbolVariant(.fill)
+                            .foregroundColor(
+                                selection.isEmpty
+                                ? Color(light: .black, dark: .secondary)
+                                : Color(light: .white, dark: .black)
+                            )
                     }
                     .disabled(selection.isEmpty)
                     .font(.system(size: 15))
@@ -86,13 +101,14 @@ struct KeyboardView: View {
                 }
                 .buttonStyle(FillOnPressButtonStyle())
             }
-            .opacity(0.7)
+            .opacity(colorScheme == .light ? 0.7 : 1)
             .font(.system(size: 21))
             .padding(.horizontal, 25)
             .padding(.bottom, 5)
             .accentColor(.primary)
             .imageScale(.large)
         }
+        .animation(.easeInOut(duration: 0.15), value: multiple)
         .frame(width: 390, height: 278)
     }
 }
@@ -128,7 +144,8 @@ struct KeyboardView_Previews: PreviewProvider {
                 Color.clear.frame(height: 58)
             }
             .background {
-                Color(red: 209/255, green: 210/255, blue: 217/255)
+                Color(light: Color(red: 209/255, green: 210/255, blue: 217/255),
+                      dark: Color(red: 43/255, green: 43/255, blue: 43/255))
             }
         }.ignoresSafeArea(edges: .bottom)
     }
