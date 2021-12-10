@@ -86,26 +86,32 @@ struct ImageChip: View {
                 .animation(.easeInOut(duration: 0.2), value: copiedCount)
         }
         .overlay(alignment: .bottomTrailing) {
-            if let selection = selection {
-                Button(action: toggle) {
-                    Group {
-                        if let image = loader.image, selection.contains(image) {
-                            Image(systemSymbol: .checkmarkCircle)
-                                .foregroundStyle(.white, .blue)
-                        } else {
-                            Image(systemSymbol: .circle)
-                                .foregroundStyle(.ultraThinMaterial)
+            Group {
+                if let selection = selection {
+                    Button(action: toggle) {
+                        Group {
+                            if let image = loader.image, selection.contains(image) {
+                                Image(systemSymbol: .checkmarkCircle)
+                                    .foregroundStyle(.white, .blue)
+                            } else {
+                                Image(systemSymbol: .circle)
+                                    .foregroundStyle(.ultraThinMaterial)
+                            }
                         }
+                        .symbolVariant(.fill)
+                        .overlay(Image(systemSymbol: .circle).font(.title.weight(.light)).foregroundColor(.white))
                     }
-                    .symbolVariant(.fill)
-                    .overlay(Image(systemSymbol: .circle).font(.title.weight(.light)).foregroundColor(.white))
+                    .font(.title)
+                    .imageScale(.large)
+                    .shadow(radius: 5)
+                    .transition(
+                        .opacity
+                            .combined(with: .scale(scale: 0.75))
+                    )
                 }
-                .font(.title)
-                .imageScale(.large)
-                .offset(x: -5, y: -20)
-                .shadow(radius: 5)
-                .buttonStyle(NoneButtonStyle())
             }
+            .offset(x: -5, y: -20)
+            .buttonStyle(NoneButtonStyle())
         }
     }
 }

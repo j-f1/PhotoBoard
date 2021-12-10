@@ -39,6 +39,7 @@ struct KeyboardView: View {
 
     @StateObject var provider = AssetProvider()
     @State var selection: Set<UIImage>?
+    @State var didCopy = false
 
     private var multiple: Bool { selection != nil }
 
@@ -78,22 +79,39 @@ struct KeyboardView: View {
                         )
                 }
                 Spacer()
-                if let selection = selection {
-                    Button(action: {
-                        UIPasteboard.general.images = Array(selection)
-                        self.selection = nil
-                    }) {
-                        Label("Copy \(selection.count) Photo\(selection.count == 1 ? "" : "s")", systemSymbol: .docOnDoc)
-                            .symbolVariant(.fill)
-                            .foregroundColor(
-                                selection.isEmpty
-                                ? Color(light: .black, dark: .secondary)
-                                : Color(light: .white, dark: .black)
-                            )
+                ZStack {
+                    HStack {
+                        if didCopy {
+                            Label("Copied!", systemSymbol: .checkmark)
+                                .transition(.opacity)
+                                .font(.body)
+                        }
+                    }.animation(didCopy ? nil : .easeInOut(duration: 1), value: didCopy)
+                    if let selection = selection {
+                        Button(action: {
+                            UIPasteboard.general.images = Array(selection)
+                            self.selection = nil
+                            self.didCopy = true
+                            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+                                self.didCopy = false
+                            }
+                        }) {
+                            Label("Copy \(selection.count) Photo\(selection.count == 1 ? "" : "s")", systemSymbol: .docOnDoc)
+                                .symbolVariant(selection.isEmpty ? .none : .fill)
+                                .foregroundColor(
+                                    selection.isEmpty
+                                    ? Color(light: .black, dark: .secondary)
+                                    : Color(light: .white, dark: .black)
+                                )
+                        }
+                        .disabled(selection.isEmpty)
+                        .font(.system(size: 15))
+                        .buttonStyle(.borderedProminent)
+                        .transition(
+                            .opacity
+                                .combined(with: .scale(scale: 0.9))
+                        )
                     }
-                    .disabled(selection.isEmpty)
-                    .font(.system(size: 15))
-                    .buttonStyle(.borderedProminent)
                 }
                 Spacer()
                 Button(action: proxy.deleteBackward) {
@@ -101,6 +119,7 @@ struct KeyboardView: View {
                 }
                 .buttonStyle(FillOnPressButtonStyle())
             }
+
             .opacity(colorScheme == .light ? 0.7 : 1)
             .font(.system(size: 21))
             .padding(.horizontal, 25)
@@ -108,7 +127,7 @@ struct KeyboardView: View {
             .accentColor(.primary)
             .imageScale(.large)
         }
-        .animation(.easeInOut(duration: 0.15), value: multiple)
+        .animation(.easeInOut(duration: didCopy ? 0.35 : 0.15), value: multiple)
         .frame(width: 390, height: 278)
     }
 }
