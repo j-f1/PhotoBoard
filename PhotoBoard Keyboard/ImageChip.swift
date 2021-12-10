@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Photos
+import SFSafeSymbols
 
 struct NoneButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
@@ -40,7 +41,7 @@ struct ImageChip: View {
     }
 
     @ViewBuilder private var copiedLabel: some View {
-        Label("Copied!", systemImage: "doc.on.doc")
+        Label("Copied!", systemSymbol: .docOnDoc)
             .padding(.horizontal, 13)
             .padding(.vertical, 7)
             .background(.thinMaterial)
@@ -89,14 +90,15 @@ struct ImageChip: View {
                 Button(action: toggle) {
                     Group {
                         if let image = loader.image, selection.contains(image) {
-                            Image(systemName: "checkmark.circle.fill")
+                            Image(systemSymbol: .checkmarkCircle)
                                 .foregroundStyle(.white, .blue)
                         } else {
-                            Image(systemName: "circle.fill")
+                            Image(systemSymbol: .circle)
                                 .foregroundStyle(.ultraThinMaterial)
                         }
                     }
-                    .overlay(Image(systemName: "circle").font(.title.weight(.light)).foregroundColor(.white))
+                    .symbolVariant(.fill)
+                    .overlay(Image(systemSymbol: .circle).font(.title.weight(.light)).foregroundColor(.white))
                 }
                 .font(.title)
                 .imageScale(.large)

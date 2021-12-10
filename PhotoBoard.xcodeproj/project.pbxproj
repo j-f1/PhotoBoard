@@ -21,6 +21,8 @@
 		85D6DC5A27628B7C008C4C7A /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D6DC5827628B7C008C4C7A /* ImageProvider.swift */; };
 		85D6DC5C2762ACC5008C4C7A /* ImageChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D6DC5B2762ACC5008C4C7A /* ImageChip.swift */; };
 		85D6DC5D2762ACC5008C4C7A /* ImageChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D6DC5B2762ACC5008C4C7A /* ImageChip.swift */; };
+		85DD97EA276386C500EB167A /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 85DD97E9276386C500EB167A /* SFSafeSymbols */; };
+		85DD97ED276386CD00EB167A /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 85DD97EC276386CD00EB167A /* SFSafeSymbols */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85DD97EA276386C500EB167A /* SFSafeSymbols in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85DD97ED276386CD00EB167A /* SFSafeSymbols in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +90,7 @@
 				854AF0C3275F08B4006261DE /* PhotoBoard */,
 				854AF0D7275F08D5006261DE /* PhotoBoard Keyboard */,
 				854AF0C2275F08B4006261DE /* Products */,
+				85DD97EB276386CD00EB167A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -130,6 +135,13 @@
 			path = "PhotoBoard Keyboard";
 			sourceTree = "<group>";
 		};
+		85DD97EB276386CD00EB167A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -148,6 +160,9 @@
 				854AF0DC275F08D5006261DE /* PBXTargetDependency */,
 			);
 			name = PhotoBoard;
+			packageProductDependencies = (
+				85DD97E9276386C500EB167A /* SFSafeSymbols */,
+			);
 			productName = PhotoBoard;
 			productReference = 854AF0C1275F08B4006261DE /* PhotoBoard.app */;
 			productType = "com.apple.product-type.application";
@@ -165,6 +180,9 @@
 			dependencies = (
 			);
 			name = "PhotoBoard Keyboard";
+			packageProductDependencies = (
+				85DD97EC276386CD00EB167A /* SFSafeSymbols */,
+			);
 			productName = "PhotoBoard Keyboard";
 			productReference = 854AF0D6275F08D5006261DE /* PhotoBoard Keyboard.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -196,6 +214,9 @@
 				Base,
 			);
 			mainGroup = 854AF0B8275F08B4006261DE;
+			packageReferences = (
+				85DD97E8276386C500EB167A /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
+			);
 			productRefGroup = 854AF0C2275F08B4006261DE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -521,6 +542,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		85DD97E8276386C500EB167A /* XCRemoteSwiftPackageReference "SFSafeSymbols" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/piknotech/SFSafeSymbols";
+			requirement = {
+				branch = stable;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		85DD97E9276386C500EB167A /* SFSafeSymbols */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 85DD97E8276386C500EB167A /* XCRemoteSwiftPackageReference "SFSafeSymbols" */;
+			productName = SFSafeSymbols;
+		};
+		85DD97EC276386CD00EB167A /* SFSafeSymbols */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 85DD97E8276386C500EB167A /* XCRemoteSwiftPackageReference "SFSafeSymbols" */;
+			productName = SFSafeSymbols;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 854AF0B9275F08B4006261DE /* Project object */;
 }

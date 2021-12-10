@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Photos
+import SFSafeSymbols
 
 let data = Array(repeating: 0, count: 10).map { _ in CGFloat.random(in: (3/4)...(4/3)) }
 
@@ -54,7 +55,7 @@ struct KeyboardView: View {
                         selection = []
                     }
                 }) {
-                    Image(systemName: "square.stack")
+                    Image(systemSymbol: .squareStack)
                         .foregroundColor(multiple ? Color(uiColor: .systemBackground) : .primary)
                         .scaleEffect(multiple ? 0.9 : 1)
                         .background(
@@ -72,7 +73,8 @@ struct KeyboardView: View {
                         UIPasteboard.general.images = Array(selection)
                         self.selection = nil
                     }) {
-                        Label("Copy \(selection.count) Photo\(selection.count == 1 ? "" : "s")", systemImage: "doc.on.doc.fill")
+                        Label("Copy \(selection.count) Photo\(selection.count == 1 ? "" : "s")", systemSymbol: .docOnDoc)
+                            .symbolVariant(.fill)
                     }
                     .disabled(selection.isEmpty)
                     .font(.system(size: 15))
@@ -80,7 +82,7 @@ struct KeyboardView: View {
                 }
                 Spacer()
                 Button(action: proxy.deleteBackward) {
-                    Image(systemName: "delete.backward")
+                    Image(systemSymbol: .deleteBackward)
                 }
                 .buttonStyle(FillOnPressButtonStyle())
             }
