@@ -93,7 +93,7 @@ struct KeyboardView: View {
                 ZStack {
                     HStack {
                         if didCopy {
-                            Label("Copied!", systemSymbol: .checkmark)
+                            Label("Copied", systemSymbol: .checkmark)
                                 .transition(.opacity)
                                 .font(.body)
                         }

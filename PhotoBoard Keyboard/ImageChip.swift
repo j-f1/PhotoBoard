@@ -49,11 +49,11 @@ struct ImageChip: View {
                     Spacer()
                     Group {
                         if geom.size.width > 100 {
-                            Label("Copied!", systemSymbol: .docOnDoc)
+                            Label("Copied", systemSymbol: .docOnDoc)
                         } else {
                             VStack {
                                 Image(systemSymbol: .docOnDoc)
-                                Text("Copied!")
+                                Text("Copied")
                             }
                         }
                     }
