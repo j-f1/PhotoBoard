@@ -33,9 +33,13 @@ extension PHAsset: Identifiable {
 @MainActor
 class AssetProvider: ObservableObject {
     @Published var photos = AssetResult()
-    private var fetchLimit = 20
+    private var fetchLimit = 5
 
-    init() {
+    init() {}
+
+    func loadMore() {
+        fetchLimit += 5
+        print("Trying \(fetchLimit)")
         fetchPhotos()
     }
 

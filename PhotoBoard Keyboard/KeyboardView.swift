@@ -33,7 +33,6 @@ struct FloatyButtonStyle: ButtonStyle {
                     .opacity(colorScheme == .dark ? 0.5 : 0.9)
                     .scaleEffect(0.98)
             }
-            .padding(.vertical)
             .scaleEffect(configuration.isPressed ? 0.95 : 1)
     }
 }
@@ -64,9 +63,33 @@ struct KeyboardView: View {
                         ImageChip(asset: asset, selection: $selection)
                             .frame(maxWidth: 250)
                     }
+                    if provider.photos.count < 30 {
+                        ProgressView()
+                            .onAppear {
+                                provider.loadMore()
+                            }
+                    } else {
+                        VStack {
+                            Spacer()
+                            HStack {
+                                Spacer()
+                                Text("See more photos in the Photos app")
+                                    .font(.title.weight(.medium))
+                                    .foregroundStyle(.tertiary)
+                                    .multilineTextAlignment(.center)
+                                Spacer()
+                            }
+                            Spacer()
+                        }
+                        .padding()
+                        .background(.ultraThinMaterial)
+                        .cornerRadius(10)
+                        .frame(maxWidth: 200)
+                    }
                 }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 5)
+                .padding(.vertical)
             }
             .buttonStyle(FloatyButtonStyle())
 
@@ -141,6 +164,9 @@ struct KeyboardView: View {
         }
         .animation(.easeInOut(duration: didCopy ? 0.35 : 0.15), value: multiple)
         .frame(height: 278)
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didReceiveMemoryWarningNotification, object: nil)) {
+            print($0)
+        }
     }
 }
 
