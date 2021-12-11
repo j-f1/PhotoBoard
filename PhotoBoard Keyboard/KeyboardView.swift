@@ -62,6 +62,7 @@ struct KeyboardView: View {
                 LazyHStack(spacing: 25) {
                     ForEach(provider.photos) { asset in
                         ImageChip(asset: asset, selection: $selection)
+                            .frame(maxWidth: 250)
                     }
                 }
                 .padding(.horizontal, 20)
