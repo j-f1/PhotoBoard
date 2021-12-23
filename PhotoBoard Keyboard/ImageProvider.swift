@@ -8,6 +8,19 @@
 import SwiftUI
 import Photos
 
+actor ProgressUpdater {
+    @MainActor unowned let provider: ImageProvider
+    init(provider: ImageProvider) {
+        self.provider = provider
+    }
+
+    func setProgress(to progress: Double) async {
+        await MainActor.run {
+            provider.progress = progress
+        }
+    }
+}
+
 @MainActor
 class ImageProvider: NSObject, ObservableObject {
     var itemProvider: NSItemProvider {
@@ -56,8 +69,11 @@ class ImageProvider: NSObject, ObservableObject {
         options.deliveryMode = .opportunistic
         options.isNetworkAccessAllowed = true
         options.resizeMode = .fast
-        options.progressHandler = { [weak self] (progress, error, stop, info) in
-            self?.progress = progress
+        let updater = ProgressUpdater(provider: self)
+        options.progressHandler = { (progress, error, stop, info) in
+            Task {
+                await updater.setProgress(to: progress)
+            }
         }
 
         requestID = Self.imageManager.requestImage(
