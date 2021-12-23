@@ -129,7 +129,7 @@ struct ImageChip: View {
                     )
                 }
             }
-            .offset(x: -5, y: -20)
+            .offset(x: -5, y: -12)
             .buttonStyle(NoneButtonStyle())
         }
     }
