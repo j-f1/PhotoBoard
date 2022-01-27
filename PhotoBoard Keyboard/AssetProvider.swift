@@ -45,10 +45,13 @@ class AssetProvider: ObservableObject {
 
     private func fetchPhotos() {
         DispatchQueue.global(qos: .userInitiated).async { [fetchLimit] in
+            let recents = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumUserLibrary, options: nil)
+
             let fetchOpts = PHFetchOptions()
             fetchOpts.sortDescriptors = [NSSortDescriptor(keyPath: \PHAsset.creationDate, ascending: false)]
             fetchOpts.fetchLimit = fetchLimit
-            let result = AssetResult(PHAsset.fetchAssets(with: .image, options: fetchOpts))
+            fetchOpts.predicate = NSPredicate(format: "mediaType == \(PHAssetMediaType.image.rawValue)", argumentArray: [])
+            let result = AssetResult(PHAsset.fetchAssets(in: recents.firstObject!, options: fetchOpts))
 
             DispatchQueue.main.async {
                 self.photos = result
