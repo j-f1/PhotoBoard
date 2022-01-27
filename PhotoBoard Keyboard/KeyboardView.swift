@@ -48,7 +48,7 @@ struct KeyboardView: View {
     let proxy: UITextDocumentProxy
 
     @StateObject var provider = AssetProvider()
-    @State var selection: Set<ImageProvider>?
+    @State var selection: [ImageProvider]?
     @State var didCopy = false
 
     private var multiple: Bool { selection != nil }

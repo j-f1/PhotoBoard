@@ -19,11 +19,11 @@ struct NoneButtonStyle: ButtonStyle {
 struct ImageChip: View {
     @StateObject var loader: ImageProvider
     let asset: PHAsset
-    @Binding var selection: Set<ImageProvider>?
+    @Binding var selection: [ImageProvider]?
 
     @State private var copiedCount = 0
 
-    init(asset: PHAsset, selection: Binding<Set<ImageProvider>?>) {
+    init(asset: PHAsset, selection: Binding<[ImageProvider]?>) {
         self.asset = asset
         _loader = StateObject(wrappedValue: ImageProvider(asset: asset))
         _selection = selection
@@ -81,13 +81,12 @@ struct ImageChip: View {
     }
 
     private func toggle() {
-        if var selection = self.selection {
+        if let selection = self.selection {
             if selection.contains(loader) {
-                selection.remove(loader)
+                self.selection = selection.filter { $0 != loader }
             } else {
-                selection.insert(loader)
+                self.selection = selection + [loader]
             }
-            self.selection = selection
         }
     }
 
@@ -109,9 +108,14 @@ struct ImageChip: View {
                 if let selection = selection {
                     Button(action: { toggle() }) {
                         Group {
-                            if selection.contains(loader) {
-                                Image(systemSymbol: .checkmarkCircle)
-                                    .foregroundStyle(.white, .blue)
+                            if let index = selection.firstIndex(of: loader) {
+                                if index < 50 {
+                                    Image(systemName: "\(index + 1).circle")
+                                        .foregroundStyle(.white, .blue)
+                                } else {
+                                    Image(systemSymbol: .infinityCircle)
+                                        .foregroundStyle(.white, .blue)
+                                }
                             } else {
                                 Image(systemSymbol: .circle)
                                     .foregroundStyle(.ultraThinMaterial)
