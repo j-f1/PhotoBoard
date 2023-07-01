@@ -122,7 +122,11 @@ struct ImageChip: View {
                             }
                         }
                         .symbolVariant(.fill)
-                        .overlay(Image(systemSymbol: .circle).font(.title.weight(.light)).foregroundColor(.white))
+                        .overlay(
+                            Image(systemSymbol: .circle)
+                                .font(.title.weight(.light))
+                                .foregroundColor(.white)
+                        )
                     }
                     .font(.title)
                     .imageScale(.large)
